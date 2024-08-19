@@ -22,7 +22,7 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-          repositories: "$TARGET_REPO"
+          repositories: $TARGET_REPO
 
       - name: Send Dispatch Event
         run: |
