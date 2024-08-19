@@ -1,9 +1,14 @@
-name: Trigger CI Workflow Repo 1
+name: Trigger CI Workflow In Template Repo
 
 on:
   push:
     branches:
       - main
+
+env:
+  OWNER: fruneen
+  REPO: ship-template-ci-cd
+  WORKFLOW_FILE_NAME: update-template.yml
 
 jobs:
   trigger-workflow:
@@ -16,13 +21,11 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-          repositories: "ship,ship-template-ci-cd"
 
       - name: Send Dispatch Event
         run: |
           curl -X POST \
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
-            https://api.github.com/repos/fruneen/ship-template-ci-cd/actions/workflows/update-template.yml/dispatches \
+            https://api.github.com/repos/$OWNER/$REPO/actions/workflows/$WORKFLOW_FILE_NAME/dispatches \
             -d '{"ref": "main"}'
