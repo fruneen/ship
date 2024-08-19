@@ -1,4 +1,4 @@
-name: Trigger CI Workflow Repo
+name: Trigger CI Workflow Repo 1
 
 on:
   push:
