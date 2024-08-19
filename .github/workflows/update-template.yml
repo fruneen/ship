@@ -8,6 +8,7 @@ on:
 env:
   OWNER: fruneen
   REPO: ship-template-ci-cd
+  TARGET_REPO: ship-template-ci-cd
   WORKFLOW_FILE_NAME: update-template.yml
 
 jobs:
@@ -21,7 +22,7 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-          repositories: "ship-template-ci-cd"
+          repositories: "$TARGET_REPO"
 
       - name: Send Dispatch Event
         run: |
